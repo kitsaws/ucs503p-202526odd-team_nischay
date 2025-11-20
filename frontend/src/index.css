@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+#root{
+    overflow-x: hidden;
+}
+
 @theme {
     --color-background: oklch(0.9879 0.0029 264.54);
     --color-foreground: oklch(1 0 0);

@@ -33,6 +33,7 @@ router.get('/me', (req, res) => {
 });
 
 router.get('/google', passport.authenticate("google", ["profile", "email"]));
+router.get('/github', passport.authenticate('github', { scope: ['user:email'] }));
 
 router.get('/logout', (req, res, next) => {
     req.logout(function (err) {
@@ -57,10 +58,22 @@ router.get('/logout', (req, res, next) => {
 
 router.get(
     "/google/callback",
-    passport.authenticate('google', {
-        successRedirect: process.env.CLIENT_URL,
-        failureRedirect: '/login/failed',
-    })
+    passport.authenticate("google", { failureRedirect: "/login/failed" }),
+    (req, res) => {
+        const userId = req.user._id; // passport puts user on req
+        res.redirect(`${process.env.CLIENT_URL}/profile/${userId}/edit-profile`);
+    }
+);
+
+router.get(
+    "/github/callback",
+    passport.authenticate('github', { failureRedirect: "/login/failed" }),
+    (req, res) => {
+        const userId = req.user._id; // passport puts user on req
+        res.redirect(`${process.env.CLIENT_URL}/profile/${userId}/edit-profile`);
+    }
 )
+
+
 
 module.exports = router
