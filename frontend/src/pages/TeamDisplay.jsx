@@ -131,7 +131,7 @@ const TeamDisplay = () => {
                         )}
 
                         {member.skills && member.skills.length > 0 && (
-                          <div className="mt-1 flex flex-wra justify-center items-center gap-1 w-full">
+                          <div className="mt-1 flex flex-wrap justify-center sm:justify-start items-center gap-1 w-full">
                             {member.skills.map((skill, index) => (
                               <p
                                 key={index}
@@ -252,7 +252,7 @@ const TeamDisplay = () => {
                     </Button>
                   ) : isTeamFull ? (
                     <Button
-                      variant="outline"
+                      variant="border"
                       className="justify-center bg-muted text-muted-foreground cursor-not-allowed"
                     >
                       Team Full
@@ -286,7 +286,7 @@ const TeamDisplay = () => {
 
                 {isTeamFull ? (
                   <Button
-                    variant="outline"
+                    variant="border"
                     className="justify-center bg-muted text-muted-foreground cursor-not-allowed"
                   >
                     Team Full

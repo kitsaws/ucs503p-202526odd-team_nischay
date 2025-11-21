@@ -28,7 +28,7 @@ exports.createEvent = async (req, res) => {
 // Get a single event
 exports.getEventById = async (req, res) => {
   try {
-    const event = await Event.findById(req.params.id);
+    const event = await Event.findById(req.params.id).populate({path: 'teams', populate: {path: 'members'}});
     if (!event) return res.status(404).json({ message: 'Event not found' });
     res.json(event);
   } catch (err) {

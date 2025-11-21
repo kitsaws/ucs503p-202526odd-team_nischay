@@ -42,7 +42,7 @@ exports.createTeam = async (req, res) => {
     if (!teamName || !event || !roles || roles.length === 0) {
       return res.status(400).json({ message: "Team name, event, and roles are required" });
     }
-    if ( teamSize === 0 ) {
+    if (teamSize === 0) {
       return res.status(400).json({ message: "Team Size cannot be 0" });
     }
 
@@ -63,12 +63,14 @@ exports.createTeam = async (req, res) => {
 
     const savedTeam = await newTeam.save();
 
+    await Event.findByIdAndUpdate(event, { $addToSet: { teams: savedTeam._id } });
+
     // ✅ Link this team to the creator (and any other initial members)
     await User.updateMany(
       { _id: { $in: savedTeam.members } },
       { $addToSet: { teams: savedTeam._id } } // addToSet avoids duplicates
     );
-    
+
     res.status(201).json(savedTeam);
   } catch (err) {
     console.error(err);
@@ -83,7 +85,7 @@ exports.requestToJoinTeam = async (req, res) => {
 
     // Check if already requested
     console.log(req.user);
-    
+
     const existingRequest = team.requests.find(r => r.userId.toString() === req.user.id);
     if (existingRequest) return res.status(400).json({ message: 'Already requested' });
 

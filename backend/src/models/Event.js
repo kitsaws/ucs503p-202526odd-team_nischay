@@ -11,6 +11,9 @@ const eventSchema = new mongoose.Schema(
       enum: ["Hackathon", "Workshop", "Competition", "Other"],
       default: "Other",
     },
+    teams: [
+      { type: mongoose.Schema.Types.ObjectId, ref: "Team" }
+    ],
     organizer: { type: String, required: true },
     createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   },

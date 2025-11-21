@@ -43,15 +43,12 @@ const Card = ({ event }) => {
                 </div>
 
                 <div className="pt-4 flex flex-col lg:flex-row gap-2 lg:gap-4 mb-2">
-                    <Button variant="default" className="justify-center items-center flex-1">
-                        View Details
-                    </Button>
                     <Button
                         variant="outline"
                         className="justify-center items-center flex-1"
-                        onClick={() => navigate('/create-team')}
+                        onClick={() => navigate(`/event/${event._id}`)}
                     >
-                        Join Event
+                        View Registered Teams
                     </Button>
                 </div>
             </div>

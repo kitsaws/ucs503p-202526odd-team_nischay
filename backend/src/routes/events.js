@@ -1,5 +1,6 @@
 const express = require("express");
 const Event = require("../models/Event"); // adjust path if needed
+const { getEventById } = require("../controllers/eventController");
 
 const router = express.Router();
 
@@ -15,5 +16,7 @@ router.get("/", async (req, res) => {
     res.status(500).json({ message: "Server Error" });
   }
 });
+
+router.get('/:id', getEventById);
 
 module.exports = router;

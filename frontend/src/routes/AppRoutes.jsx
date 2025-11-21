@@ -8,13 +8,15 @@ import TeamDisplay from '../pages/TeamDisplay'
 import Profile from '../pages/Profile'
 import EditProfile from '../pages/EditProfile'
 import TeamRequests from '../pages/TeamRequests'
+import EventDisplay from '../pages/EventDisplay'
 
 const AppRoutes = () => {
   return (
     <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/events' element={<EventDashboard />} />
         <Route path='/login' element={<Auth />} />
+        <Route path='/events' element={<EventDashboard />} />
+        <Route path='/event/:id' element={<EventDisplay />} />
         <Route path='/create-team' element={<CreateTeam />} />
         <Route path='/teams' element={<TeamDashboard />} />
         <Route path='/team/:id' element={<TeamDisplay />} />
